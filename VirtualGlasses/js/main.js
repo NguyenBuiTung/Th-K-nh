@@ -15,11 +15,9 @@ let showglasse = () => {
     for (let item of dataGlasses) {
         console.log(item)
         html += `
-        <div class="col-4">
+        <div class="col-4" onclick="handelGlass('${item.id}')">
              <div class="item">
-                <a href="">
                     <img class="img-fluid" src="${item.src}" alt="" />
-                </a>
             </div>
          </div>
         `
@@ -27,4 +25,34 @@ let showglasse = () => {
     document.querySelector('#vglassesList').innerHTML = html
 }
 showglasse()
+window.handelGlass = (id) => {
+    // console.log('tung')
+    let html = ''
+    let html2=''
+    for (let item of dataGlasses) {
+        if (item.id === id) {
+            html += `
+        <div class="item">
+            <img class="img-fluid" src="${item.virtualImg}" alt="" />
+        </div>
+            `   
+            html2+=`
+            <div class="d-flex align-items-center">
+            <h2 class="h5">${item.name}-</h2>
+            <h2 class="h5">${item.brand}</h2>
+            <h3 class="h5">(${item.color})</h3>
+        </div>
+        <div class="d-flex align-items-center">
+            <h2 class="bg-danger rounded">$${item.price}</h2>
+        <span  class="stock text-success">Stocking</span>
+        </div>
+        <p>${item.description}</p>
+            `
+        }
 
+
+    }
+    document.querySelector('#avatar').innerHTML = html
+    document.querySelector('#glassesInfo').innerHTML = html2
+    document.querySelector('#glassesInfo').classList.add('d-block')
+}
